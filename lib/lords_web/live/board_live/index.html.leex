@@ -1,0 +1,18 @@
+<h1>Boards</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <%= live_modal @socket, LordsWeb.BoardLive.FormComponent,
+    id: @board.id || :new,
+    title: @page_title,
+    action: @live_action,
+    board: @board,
+    return_to: Routes.board_index_path(@socket, :index) %>
+<% end %>
+
+<div id="boards">
+  <%= for board <- @boards do %>
+    <%= live_component @socket, LordsWeb.BoardLive.BoardComponent, id: board.id, board: board %>
+  <% end %>
+</div>
+
+<span><%= live_patch "New Board", to: Routes.board_index_path(@socket, :new) %></span>
