@@ -1,5 +1,3 @@
-<h1>Boards</h1>
-
 <%= if @live_action in [:new, :edit] do %>
   <%= live_modal @socket, LordsWeb.BoardLive.FormComponent,
     id: @board.id || :new,
@@ -10,9 +8,14 @@
 <% end %>
 
 <div id="boards">
-  <%= for board <- @boards do %>
-    <%= live_component @socket, LordsWeb.BoardLive.BoardComponent, id: board.id, board: board %>
-  <% end %>
+  <div class="dropdown">
+    <button class="dropbtn">Boards</button>
+    <div class="dropdown-content">
+      <%= for board <- @boards do %>
+        <%= live_component @socket, LordsWeb.BoardLive.BoardComponent, id: board.id, board: board %>
+      <% end %>
+    </div>
+  </div>
 </div>
 
 <span><%= live_patch "New Board", to: Routes.board_index_path(@socket, :new) %></span>

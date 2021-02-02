@@ -8,11 +8,7 @@ defmodule LordsWeb.BoardLive.BoardComponent do
 					<div class="column column-10">
 						<div class="board-avatar"></div>
 					</div>
-					<div class="column column-90 board-title">
-						<b><%= @board.title %></b>
-						(<%= @board.owner %>)
-						(<%= @board.team_name %>)
-					</div>
+					<a href="boards/<%= @board.id %>"><%= @board.title %></a>
 				</div>
 			</div>
 		"""

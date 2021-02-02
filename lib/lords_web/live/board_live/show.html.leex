@@ -1,5 +1,3 @@
-<h1>Show Board</h1>
-
 <%= if @live_action in [:edit] do %>
   <%= live_modal @socket, LordsWeb.BoardLive.FormComponent,
     id: @board.id,
@@ -9,24 +7,11 @@
     return_to: Routes.board_show_path(@socket, :show, @board) %>
 <% end %>
 
-<ul>
-
-  <li>
-    <strong>Title:</strong>
-    <%= @board.title %>
-  </li>
-
-  <li>
-    <strong>Owner:</strong>
-    <%= @board.owner %>
-  </li>
-
-  <li>
-    <strong>Role:</strong>
-    <%= @board.role %>
-  </li>
-
-</ul>
+<div class="topnav">
+  <div class="button"><%= @board.title %></div>
+  <div class="button"><%= @board.team_name %></div>
+  <div class="button"><%= @board.owner %></div>
+</div>
 
 <span><%= live_patch "Edit", to: Routes.board_show_path(@socket, :edit, @board), class: "button" %></span>
 <span><%= live_redirect "Back", to: Routes.board_index_path(@socket, :index) %></span>
