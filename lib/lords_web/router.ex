@@ -1,5 +1,6 @@
 defmodule LordsWeb.Router do
   use LordsWeb, :router
+  use Pow.Phoenix.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -14,6 +15,12 @@ defmodule LordsWeb.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/" do
+    pipe_through :browser
+
+    pow_routes()
+  end  
+
   scope "/", LordsWeb do
     pipe_through :browser
 
@@ -25,6 +32,13 @@ defmodule LordsWeb.Router do
 
     live "/boards/:id", BoardLive.Show, :show
     live "/boards/:id/show/edit", BoardLive.Show, :edit
+
+    live "/users", UserLive.Index, :index
+    live "/users/new", UserLive.Index, :new
+    live "/users/:id/edit", UserLive.Index, :edit
+
+    live "/users/:id", UserLive.Show, :show
+    live "/users/:id/show/edit", UserLive.Show, :edit    
   end
 
   # Other scopes may use custom stacks.
